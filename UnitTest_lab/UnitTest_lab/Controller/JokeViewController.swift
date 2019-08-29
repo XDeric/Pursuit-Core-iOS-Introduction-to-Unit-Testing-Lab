@@ -8,7 +8,7 @@
 
 import UIKit
 
-var jokes = Joking()
+var jokes = [Joking]()
 class JokeViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class JokeViewController: UIViewController {
         
         do{
             let data = try Data(contentsOf: url)
-            jokes = try WeatherInfo.getWeather(from: data)
+            jokes = try Joking.getJoke(from: data)
             // if either try fails the catch will catch both of them
         } catch{
             fatalError("couldn't get weather from JSON")

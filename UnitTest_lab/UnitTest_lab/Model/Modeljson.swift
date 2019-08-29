@@ -11,9 +11,9 @@ import Foundation
 struct Joking: Codable{
     let name: String
     
-    static func getWeather(from data: Data) throws -> Joking{
+    static func getJoke(from data: Data) -> [Joking]{
         do{
-            let fun = try JSONDecoder().decode(Joking.self, from: data)
+            let fun = try JSONDecoder().decode([Joking].self, from: data)
             return fun
         } catch { fatalError("\(error)")}
     }
@@ -22,9 +22,9 @@ struct Joking: Codable{
 struct Star: Codable{
     let name: String
     
-    static func getWeather(from data: Data) throws -> Star{
+    static func getStar(from data: Data) -> [Star]{
         do{
-            let fun = try JSONDecoder().decode(Star.self, from: data)
+            let fun = try JSONDecoder().decode([Star].self, from: data)
             return fun
         } catch { fatalError("\(error)")}
     }
@@ -33,9 +33,9 @@ struct Star: Codable{
 struct Trivias: Codable{
     let name: String
     
-    static func getWeather(from data: Data) throws -> Trivias{
+    static func getTrivia(from data: Data) -> [Trivias]{
         do{
-            let fun = try JSONDecoder().decode(Trivias.self, from: data)
+            let fun = try JSONDecoder().decode([Trivias].self, from: data)
             return fun
         } catch { fatalError("\(error)")}
     }
