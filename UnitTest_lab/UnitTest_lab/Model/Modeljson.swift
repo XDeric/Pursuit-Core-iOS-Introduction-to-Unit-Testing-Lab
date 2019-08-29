@@ -9,7 +9,8 @@
 import Foundation
 
 struct Joking: Codable{
-    let name: String
+    let setup: String
+    let punchline: String
     
     static func getJoke(from data: Data) -> [Joking]{
         do{
@@ -20,7 +21,8 @@ struct Joking: Codable{
 }
 
 struct Star: Codable{
-    let name: String
+    let title: String
+    let episode_id: Int
     
     static func getStar(from data: Data) -> [Star]{
         do{
@@ -31,7 +33,12 @@ struct Star: Codable{
 }
 
 struct Trivias: Codable{
-    let name: String
+    let category: String
+    let type: String
+    let difficulty: String
+    let question: String
+    let correct_answer: Bool
+    let incorrect_answers: Bool
     
     static func getTrivia(from data: Data) -> [Trivias]{
         do{

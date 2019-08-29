@@ -9,10 +9,21 @@
 import UIKit
 
 var jokes = [Joking]()
-class JokeViewController: UIViewController {
+class JokeViewController: UIViewController,UITableViewDataSource {
+    @IBOutlet weak var jokeTableViewOutlet: UITableView!
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return jokes.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        jokeTableViewOutlet.dataSource = self
         loadData()
         // Do any additional setup after loading the view.
     }
@@ -20,7 +31,7 @@ class JokeViewController: UIViewController {
     private func loadData(){
         // just the string for the name of the file
         guard let pathToJSONFile =
-            Bundle.main.path(forResource: "joke", ofType: "json") else {fatalError("couldn't Find json file")}
+            Bundle.main.path(forResource: "Joke", ofType: "json") else {fatalError("couldn't Find json file")}
         print(pathToJSONFile)
         // is a reference to the ctual location of the json file
         let url = URL(fileURLWithPath: pathToJSONFile)
