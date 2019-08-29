@@ -16,19 +16,22 @@ class StarWarViewController: UIViewController,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = starTableViewOutlet.dequeueReusableCell(withIdentifier: "starwarCell", for: indexPath)
+        cell.textLabel?.text = starwars[indexPath.row].title
+        cell.detailTextLabel?.text = "Episode: \(starwars[indexPath.row].episode_id)"
+        return cell
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         starTableViewOutlet.dataSource = self
-        loadData()
+        //loadData()
 
         // Do any additional setup after loading the view.
     }
     
-    private func loadData(){
+    private func loadData() -> Data{
         // just the string for the name of the file
         guard let pathToJSONFile =
             Bundle.main.path(forResource: "StarWar", ofType: "json") else {fatalError("couldn't Find json file")}
@@ -38,7 +41,8 @@ class StarWarViewController: UIViewController,UITableViewDataSource {
         
         do{
             let data = try Data(contentsOf: url)
-            starwars = try Star.getStar(from: data)
+            return data
+            //starwars = try Star.getStar(from: data)
             // if either try fails the catch will catch both of them
         } catch{
             fatalError("couldn't get weather from JSON")

@@ -17,18 +17,20 @@ class JokeViewController: UIViewController,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = jokeTableViewOutlet.dequeueReusableCell(withIdentifier: "jokeCell", for: indexPath)
+        cell.textLabel?.text = jokes[indexPath.row].setup
+        return cell
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         jokeTableViewOutlet.dataSource = self
-        loadData()
+        //loadData()
         // Do any additional setup after loading the view.
     }
 
-    private func loadData(){
+    private func loadData() -> Data{
         // just the string for the name of the file
         guard let pathToJSONFile =
             Bundle.main.path(forResource: "Joke", ofType: "json") else {fatalError("couldn't Find json file")}
@@ -38,7 +40,8 @@ class JokeViewController: UIViewController,UITableViewDataSource {
         
         do{
             let data = try Data(contentsOf: url)
-            jokes = try Joking.getJoke(from: data)
+            return data
+            //jokes = try Joking.getJoke(from: data)
             // if either try fails the catch will catch both of them
         } catch{
             fatalError("couldn't get weather from JSON")

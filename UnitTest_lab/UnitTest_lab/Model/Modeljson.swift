@@ -20,18 +20,20 @@ struct Joking: Codable{
     }
 }
 
+//-----------------------------------------------------------------------------------------------------
 struct Star: Codable{
     let title: String
     let episode_id: Int
     
     static func getStar(from data: Data) -> [Star]{
         do{
-            let fun = try JSONDecoder().decode([Star].self, from: data)
-            return fun
+            let war = try JSONDecoder().decode([Star].self, from: data)
+            return war
         } catch { fatalError("\(error)")}
     }
 }
 
+//------------------------------------------------------------------------------------------------------
 struct Trivias: Codable{
     let category: String
     let type: String
@@ -42,8 +44,8 @@ struct Trivias: Codable{
     
     static func getTrivia(from data: Data) -> [Trivias]{
         do{
-            let fun = try JSONDecoder().decode([Trivias].self, from: data)
-            return fun
+            let fact = try JSONDecoder().decode([Trivias].self, from: data)
+            return fact
         } catch { fatalError("\(error)")}
     }
 }

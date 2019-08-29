@@ -17,36 +17,21 @@ class TriviaViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        let cell = triviaTableViewOutlet.dequeueReusableCell(withIdentifier: "triviaCell", for: indexPath)
+        cell.textLabel?.text = trivia[indexPath.row].category
+        cell.detailTextLabel?.text = "Difficulty: \(trivia[indexPath.row].difficulty) Type: \(trivia[indexPath.row].type)"
+        return cell
     }
     
 
     override func viewDidLoad() {
-        triviaTableViewOutlet.dataSource = self
         super.viewDidLoad()
-
+        triviaTableViewOutlet.dataSource = self
+        //loadData()
         // Do any additional setup after loading the view.
     }
     
-    private func loadData(){
-        // just the string for the name of the file
-        guard let pathToJSONFile =
-            Bundle.main.path(forResource: "joke", ofType: "json") else {fatalError("couldn't Find json file")}
-        print(pathToJSONFile)
-        // is a reference to the ctual location of the json file
-        let url = URL(fileURLWithPath: pathToJSONFile)
-        
-        do{
-            let data = try Data(contentsOf: url)
-            jokes = try Joking.getJoke(from: data)
-            // if either try fails the catch will catch both of them
-        } catch{
-            fatalError("couldn't get weather from JSON")
-        }
-        //whatever we decode from the json file
-    }
-    
-    private func loadData(){
+    private func loadData() -> Data{
         // just the string for the name of the file
         guard let pathToJSONFile =
             Bundle.main.path(forResource: "Trivia", ofType: "json") else {fatalError("couldn't Find json file")}
@@ -56,7 +41,8 @@ class TriviaViewController: UIViewController, UITableViewDataSource {
         
         do{
             let data = try Data(contentsOf: url)
-            trivia = try Trivias.getTrivia(from: data)
+            return data
+            //trivia = try Trivias.getTrivia(from: data)
             // if either try fails the catch will catch both of them
         } catch{
             fatalError("couldn't get weather from JSON")
